@@ -5,22 +5,24 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/c/chroma-py/chroma-py-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/c/chroma-py/chroma-py-{{ version }}.tar.gz
   sha256: 0dc1135332e2ed6e74d7b355c8afa7b85c193a7d5af1cb8b6f79c9e2645912b2
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: "{{ PYTHON }} -m pip install . --no-deps -vv"
 
 requirements:
   host:
-    - python
+    - python {{ python_min }}
     - pip
   run:
-    - python
+    - python >={{ python_min }}
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - chroma
 
